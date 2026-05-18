@@ -288,13 +288,20 @@
             </article>
           </div>
           <div class="life-controls" aria-label="Professional life slider controls">
-            <button class="life-arrow" type="button" data-life-prev aria-label="Previous professional life slide">&larr;</button>
+            <button class="life-arrow" type="button" data-life-prev aria-label="Previous professional life slide">
+              <span aria-hidden="true">‹</span>
+            </button>
             <div class="life-dots" role="tablist" aria-label="Professional life slides">
               <button class="is-active" type="button" data-life-dot aria-label="Show perspective slide" aria-selected="true"></button>
               <button type="button" data-life-dot aria-label="Show learning slide" aria-selected="false"></button>
               <button type="button" data-life-dot aria-label="Show focus slide" aria-selected="false"></button>
             </div>
-            <button class="life-arrow" type="button" data-life-next aria-label="Next professional life slide">&rarr;</button>
+            <div class="life-timer" aria-live="polite">
+              <span data-life-seconds>5</span>s
+            </div>
+            <button class="life-arrow" type="button" data-life-next aria-label="Next professional life slide">
+              <span aria-hidden="true">›</span>
+            </button>
           </div>
         </div>
       </section>
