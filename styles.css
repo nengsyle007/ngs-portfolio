@@ -554,7 +554,7 @@ blockquote {
 
 .life-dots {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .life-dots button {
@@ -562,15 +562,32 @@ blockquote {
   border: 0;
   border-radius: 999px;
   cursor: pointer;
-  height: 10px;
+  height: 6px;
+  overflow: hidden;
   padding: 0;
-  transition: background 180ms ease, width 180ms ease;
-  width: 10px;
+  position: relative;
+  transition: background 180ms ease, opacity 180ms ease, width 180ms ease;
+  width: 22px;
 }
 
 .life-dots button.is-active {
+  background: #d7deea;
+  width: 48px;
+}
+
+.life-dots button span {
   background: var(--primary);
-  width: 34px;
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 120ms linear;
+  width: 100%;
+}
+
+.life-dots button:not(.is-active) span {
+  transform: scaleX(0) !important;
 }
 
 .life-timer {
