@@ -10,6 +10,9 @@ Static portfolio website for Puth Neng, designed for simple hosting on GitHub Pa
 - `assets/puth-neng-cv.pdf` - downloadable CV
 - `assets/profile.png` - profile image
 - `assets/cv-preview.png` - CV preview image
+- `assets/life-reading.jpg` - professional life hero image
+- `assets/life-sunset-close.jpg` - professional life image
+- `assets/life-sunset-wide.jpg` - professional life image
 
 ## Local Preview
 
