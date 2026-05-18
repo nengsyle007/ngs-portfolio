@@ -23,6 +23,7 @@ if (navToggle && navLinks) {
 const lifeSlider = document.querySelector("[data-life-slider]");
 
 if (lifeSlider) {
+  const track = lifeSlider.querySelector("[data-life-track]");
   const slides = Array.from(lifeSlider.querySelectorAll("[data-life-slide]"));
   const dots = Array.from(lifeSlider.querySelectorAll("[data-life-dot]"));
   const progressBars = Array.from(lifeSlider.querySelectorAll("[data-life-progress]"));
@@ -60,6 +61,10 @@ if (lifeSlider) {
     secondsLeft = intervalSeconds;
     updateSeconds();
     updateProgress();
+
+    if (track) {
+      track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+    }
 
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === activeIndex);
