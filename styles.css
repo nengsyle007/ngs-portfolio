@@ -425,14 +425,7 @@ blockquote {
   max-width: var(--max);
 }
 
-.life-layout {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-}
-
-.life-feature,
-.life-card {
+.life-slider {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -440,30 +433,68 @@ blockquote {
   overflow: hidden;
 }
 
-.life-feature {
-  display: grid;
-  grid-template-rows: minmax(420px, 58vh) auto;
+.life-slides {
+  min-height: 600px;
+  position: relative;
 }
 
-.life-feature img,
-.life-card img {
+.life-slide {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
   height: 100%;
-  object-fit: cover;
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(18px);
+  transition: opacity 420ms ease, transform 420ms ease;
+  visibility: hidden;
   width: 100%;
 }
 
-.life-feature img {
+.life-slide.is-active {
+  opacity: 1;
+  position: relative;
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.life-image {
+  min-height: 600px;
+  overflow: hidden;
+  position: relative;
+}
+
+.life-image::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 78%, rgba(255, 255, 255, 0.48) 100%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.life-image img {
+  height: 100%;
+  object-fit: cover;
   object-position: center 48%;
+  transform: scale(1.02);
+  transition: transform 700ms ease;
+  width: 100%;
 }
 
-.life-feature-copy {
+.life-slide.is-active .life-image img {
+  transform: scale(1.07);
+}
+
+.life-copy {
+  align-content: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(242, 245, 251, 0.96)),
+    var(--surface);
   display: grid;
-  gap: 8px;
-  padding: 26px;
+  gap: 16px;
+  padding: 48px;
 }
 
-.life-feature-copy span,
-.life-card span {
+.life-copy span {
   color: var(--primary);
   font-size: 0.78rem;
   font-weight: 900;
@@ -471,31 +502,69 @@ blockquote {
   text-transform: uppercase;
 }
 
-.life-feature-copy h3,
-.life-card h3 {
+.life-copy h3 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.05;
   margin-bottom: 0;
 }
 
-.life-feature-copy p {
+.life-copy p {
   color: var(--muted);
+  font-size: 1.08rem;
   margin-bottom: 0;
-  max-width: 720px;
+  max-width: 560px;
 }
 
-.life-side {
-  display: grid;
+.life-controls {
+  align-items: center;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  display: flex;
   gap: 18px;
+  justify-content: space-between;
+  padding: 18px 20px;
 }
 
-.life-card {
-  display: grid;
-  grid-template-rows: minmax(240px, 1fr) auto;
+.life-arrow {
+  align-items: center;
+  background: var(--ink);
+  border: 0;
+  border-radius: var(--radius);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 900;
+  height: 42px;
+  justify-content: center;
+  transition: transform 180ms ease, background 180ms ease;
+  width: 48px;
 }
 
-.life-card div {
-  display: grid;
-  gap: 6px;
-  padding: 20px;
+.life-arrow:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.life-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.life-dots button {
+  background: #d7deea;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  height: 10px;
+  padding: 0;
+  transition: background 180ms ease, width 180ms ease;
+  width: 10px;
+}
+
+.life-dots button.is-active {
+  background: var(--primary);
+  width: 34px;
 }
 
 .project-grid {
@@ -622,7 +691,7 @@ blockquote {
   .hero,
   .split,
   .contact-section,
-  .life-layout {
+  .life-slide {
     grid-template-columns: 1fr;
   }
 
@@ -640,12 +709,17 @@ blockquote {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .life-feature {
-    grid-template-rows: 380px auto;
+  .life-slides,
+  .life-image {
+    min-height: 0;
   }
 
-  .life-side {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .life-image {
+    aspect-ratio: 16 / 11;
+  }
+
+  .life-copy {
+    padding: 34px;
   }
 }
 
@@ -664,17 +738,26 @@ blockquote {
 
   .hero-metrics,
   .project-grid,
-  .education-grid,
-  .life-side {
+  .education-grid {
     grid-template-columns: 1fr;
   }
 
-  .life-feature {
-    grid-template-rows: 320px auto;
+  .life-image {
+    aspect-ratio: 3 / 4;
   }
 
-  .life-card {
-    grid-template-rows: 320px auto;
+  .life-copy {
+    padding: 24px;
+  }
+
+  .life-controls {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .life-arrow {
+    height: 40px;
+    width: 44px;
   }
 
   .timeline-content {
