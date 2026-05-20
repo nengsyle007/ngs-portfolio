@@ -719,6 +719,75 @@ blockquote {
   padding: 14px;
 }
 
+.store-portfolio {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  padding: 26px;
+}
+
+.store-portfolio-heading {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 22px;
+  max-width: 760px;
+}
+
+.store-portfolio-heading span,
+.store-app-card span {
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.store-portfolio-heading h3 {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  margin-bottom: 0;
+}
+
+.store-portfolio-heading p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.store-app-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.store-app-card {
+  background: var(--surface-soft);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  display: grid;
+  gap: 8px;
+  min-height: 184px;
+  padding: 18px;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.store-app-card:hover {
+  background: #fff;
+  border-color: rgba(111, 85, 246, 0.3);
+  transform: translateY(-3px);
+}
+
+.store-app-card h4 {
+  font-size: 1.05rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.store-app-card p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
 .project-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -869,6 +938,10 @@ blockquote {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .store-app-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .life-slides,
   .life-image {
     min-height: 0;
@@ -922,6 +995,14 @@ blockquote {
   }
 
   .achievement-features {
+    grid-template-columns: 1fr;
+  }
+
+  .store-portfolio {
+    padding: 20px;
+  }
+
+  .store-app-grid {
     grid-template-columns: 1fr;
   }
 
