@@ -136,9 +136,8 @@ if (soundToggle) {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   let audioContext;
   let masterGain;
-  let ambientNodes = [];
+  let waterNodes = [];
   let soundEnabled = false;
-  const ambientNotes = [130.81, 196.0, 246.94];
 
   const updateSoundButton = () => {
     soundToggle.classList.toggle("is-on", soundEnabled);
@@ -157,7 +156,7 @@ if (soundToggle) {
     if (!audioContext) {
       audioContext = new AudioContextClass();
       masterGain = audioContext.createGain();
-      masterGain.gain.value = 0.035;
+      masterGain.gain.value = 0.11;
       masterGain.connect(audioContext.destination);
     }
 
@@ -168,45 +167,60 @@ if (soundToggle) {
     return true;
   };
 
-  const startAmbientPad = () => {
+  const createNoiseBuffer = (durationSeconds) => {
+    const sampleRate = audioContext.sampleRate;
+    const frameCount = sampleRate * durationSeconds;
+    const buffer = audioContext.createBuffer(1, frameCount, sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < frameCount; i += 1) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    return buffer;
+  };
+
+  const startWaterSound = () => {
     if (!audioContext || !masterGain || document.hidden) {
       return;
     }
 
     const now = audioContext.currentTime;
-    const filter = audioContext.createBiquadFilter();
+    const source = audioContext.createBufferSource();
+    const highpass = audioContext.createBiquadFilter();
+    const lowpass = audioContext.createBiquadFilter();
+    const gain = audioContext.createGain();
+    const lfo = audioContext.createOscillator();
+    const lfoGain = audioContext.createGain();
 
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(720, now);
-    filter.Q.setValueAtTime(0.55, now);
-    filter.connect(masterGain);
+    source.buffer = createNoiseBuffer(3);
+    source.loop = true;
 
-    ambientNodes = ambientNotes.map((frequency, index) => {
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      const lfo = audioContext.createOscillator();
-      const lfoGain = audioContext.createGain();
+    highpass.type = "highpass";
+    highpass.frequency.setValueAtTime(180, now);
+    highpass.Q.setValueAtTime(0.7, now);
 
-      oscillator.type = index === 1 ? "triangle" : "sine";
-      oscillator.frequency.setValueAtTime(frequency, now);
-      oscillator.detune.setValueAtTime((index - 1) * 4, now);
+    lowpass.type = "lowpass";
+    lowpass.frequency.setValueAtTime(1150, now);
+    lowpass.Q.setValueAtTime(0.45, now);
 
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.08 / (index + 1), now + 1.2);
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.32, now + 0.8);
 
-      lfo.type = "sine";
-      lfo.frequency.setValueAtTime(0.035 + index * 0.012, now);
-      lfoGain.gain.setValueAtTime(4 + index * 1.5, now);
-      lfo.connect(lfoGain);
-      lfoGain.connect(oscillator.detune);
+    lfo.type = "sine";
+    lfo.frequency.setValueAtTime(0.18, now);
+    lfoGain.gain.setValueAtTime(0.08, now);
 
-      oscillator.connect(gain);
-      gain.connect(filter);
-      oscillator.start(now);
-      lfo.start(now);
+    source.connect(highpass);
+    highpass.connect(lowpass);
+    lowpass.connect(gain);
+    gain.connect(masterGain);
+    lfo.connect(lfoGain);
+    lfoGain.connect(gain.gain);
 
-      return { oscillator, gain, lfo, filter };
-    });
+    source.start(now);
+    lfo.start(now);
+    waterNodes = [{ source, gain, lfo }];
   };
 
   const stopSound = () => {
@@ -215,13 +229,13 @@ if (soundToggle) {
     }
 
     const now = audioContext.currentTime;
-    ambientNodes.forEach(({ oscillator, gain, lfo }) => {
+    waterNodes.forEach(({ source, gain, lfo }) => {
       gain.gain.cancelScheduledValues(now);
       gain.gain.setTargetAtTime(0, now, 0.25);
-      oscillator.stop(now + 0.9);
+      source.stop(now + 0.9);
       lfo.stop(now + 0.9);
     });
-    ambientNodes = [];
+    waterNodes = [];
   };
 
   const startSound = () => {
@@ -232,7 +246,7 @@ if (soundToggle) {
     }
 
     stopSound();
-    startAmbientPad();
+    startWaterSound();
   };
 
   soundToggle.addEventListener("click", () => {
