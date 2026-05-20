@@ -128,3 +128,106 @@ if (lifeSlider) {
   showSlide(0);
   startAutoPlay();
 }
+
+const soundToggle = document.querySelector("[data-sound-toggle]");
+
+if (soundToggle) {
+  const soundLabel = soundToggle.querySelector("[data-sound-label]");
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  let audioContext;
+  let masterGain;
+  let noteTimer;
+  let soundEnabled = false;
+  let step = 0;
+  const notes = [261.63, 329.63, 392.0, 493.88, 392.0, 329.63];
+
+  const updateSoundButton = () => {
+    soundToggle.classList.toggle("is-on", soundEnabled);
+    soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+    soundToggle.setAttribute("aria-label", soundEnabled ? "Turn sound off" : "Turn sound on");
+    if (soundLabel) {
+      soundLabel.textContent = soundEnabled ? "Sound On" : "Sound Off";
+    }
+  };
+
+  const ensureAudio = () => {
+    if (!AudioContextClass) {
+      return false;
+    }
+
+    if (!audioContext) {
+      audioContext = new AudioContextClass();
+      masterGain = audioContext.createGain();
+      masterGain.gain.value = 0.045;
+      masterGain.connect(audioContext.destination);
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    return true;
+  };
+
+  const playNote = () => {
+    if (!audioContext || !masterGain || document.hidden) {
+      return;
+    }
+
+    const now = audioContext.currentTime;
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(notes[step % notes.length], now);
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.22, now + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.65);
+
+    oscillator.connect(gain);
+    gain.connect(masterGain);
+    oscillator.start(now);
+    oscillator.stop(now + 1.7);
+    step += 1;
+  };
+
+  const stopSound = () => {
+    if (noteTimer) {
+      window.clearInterval(noteTimer);
+      noteTimer = undefined;
+    }
+  };
+
+  const startSound = () => {
+    if (!ensureAudio()) {
+      soundEnabled = false;
+      updateSoundButton();
+      return;
+    }
+
+    stopSound();
+    playNote();
+    noteTimer = window.setInterval(playNote, 1850);
+  };
+
+  soundToggle.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    updateSoundButton();
+
+    if (soundEnabled) {
+      startSound();
+    } else {
+      stopSound();
+    }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopSound();
+    } else if (soundEnabled) {
+      startSound();
+    }
+  });
+
+  updateSoundButton();
+}

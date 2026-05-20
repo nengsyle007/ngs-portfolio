@@ -909,6 +909,34 @@ blockquote {
   font-weight: 900;
 }
 
+.sound-toggle {
+  background: rgba(31, 37, 56, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  bottom: 22px;
+  box-shadow: 0 16px 38px rgba(31, 37, 56, 0.22);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 900;
+  min-height: 42px;
+  padding: 0 16px;
+  position: fixed;
+  right: 22px;
+  transition: background 180ms ease, transform 180ms ease;
+  z-index: 60;
+}
+
+.sound-toggle:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.sound-toggle.is-on {
+  background: var(--primary);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1075,5 +1103,10 @@ blockquote {
   .footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .sound-toggle {
+    bottom: 14px;
+    right: 14px;
   }
 }
