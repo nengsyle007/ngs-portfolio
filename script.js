@@ -136,10 +136,9 @@ if (soundToggle) {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   let audioContext;
   let masterGain;
-  let noteTimer;
+  let ambientNodes = [];
   let soundEnabled = false;
-  let step = 0;
-  const notes = [261.63, 329.63, 392.0, 493.88, 392.0, 329.63];
+  const ambientNotes = [130.81, 196.0, 246.94];
 
   const updateSoundButton = () => {
     soundToggle.classList.toggle("is-on", soundEnabled);
@@ -158,7 +157,7 @@ if (soundToggle) {
     if (!audioContext) {
       audioContext = new AudioContextClass();
       masterGain = audioContext.createGain();
-      masterGain.gain.value = 0.045;
+      masterGain.gain.value = 0.035;
       masterGain.connect(audioContext.destination);
     }
 
@@ -169,33 +168,60 @@ if (soundToggle) {
     return true;
   };
 
-  const playNote = () => {
+  const startAmbientPad = () => {
     if (!audioContext || !masterGain || document.hidden) {
       return;
     }
 
     const now = audioContext.currentTime;
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+    const filter = audioContext.createBiquadFilter();
 
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(notes[step % notes.length], now);
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.22, now + 0.08);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 1.65);
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(720, now);
+    filter.Q.setValueAtTime(0.55, now);
+    filter.connect(masterGain);
 
-    oscillator.connect(gain);
-    gain.connect(masterGain);
-    oscillator.start(now);
-    oscillator.stop(now + 1.7);
-    step += 1;
+    ambientNodes = ambientNotes.map((frequency, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      const lfo = audioContext.createOscillator();
+      const lfoGain = audioContext.createGain();
+
+      oscillator.type = index === 1 ? "triangle" : "sine";
+      oscillator.frequency.setValueAtTime(frequency, now);
+      oscillator.detune.setValueAtTime((index - 1) * 4, now);
+
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.08 / (index + 1), now + 1.2);
+
+      lfo.type = "sine";
+      lfo.frequency.setValueAtTime(0.035 + index * 0.012, now);
+      lfoGain.gain.setValueAtTime(4 + index * 1.5, now);
+      lfo.connect(lfoGain);
+      lfoGain.connect(oscillator.detune);
+
+      oscillator.connect(gain);
+      gain.connect(filter);
+      oscillator.start(now);
+      lfo.start(now);
+
+      return { oscillator, gain, lfo, filter };
+    });
   };
 
   const stopSound = () => {
-    if (noteTimer) {
-      window.clearInterval(noteTimer);
-      noteTimer = undefined;
+    if (!audioContext) {
+      return;
     }
+
+    const now = audioContext.currentTime;
+    ambientNodes.forEach(({ oscillator, gain, lfo }) => {
+      gain.gain.cancelScheduledValues(now);
+      gain.gain.setTargetAtTime(0, now, 0.25);
+      oscillator.stop(now + 0.9);
+      lfo.stop(now + 0.9);
+    });
+    ambientNodes = [];
   };
 
   const startSound = () => {
@@ -206,8 +232,7 @@ if (soundToggle) {
     }
 
     stopSound();
-    playNote();
-    noteTimer = window.setInterval(playNote, 1850);
+    startAmbientPad();
   };
 
   soundToggle.addEventListener("click", () => {
