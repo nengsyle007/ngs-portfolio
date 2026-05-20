@@ -610,6 +610,115 @@ blockquote {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.achievement-card {
+  background: linear-gradient(135deg, #1f2538, #303a56);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: #fff;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.55fr);
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 32px;
+  position: relative;
+}
+
+.achievement-card::after {
+  background: linear-gradient(180deg, rgba(15, 159, 154, 0.34), rgba(111, 85, 246, 0.16));
+  content: "";
+  inset: 0 0 0 auto;
+  position: absolute;
+  width: 34%;
+}
+
+.achievement-copy,
+.achievement-stats,
+.achievement-features {
+  position: relative;
+  z-index: 1;
+}
+
+.achievement-label {
+  color: #9de5df;
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.achievement-copy h3 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.achievement-copy p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.04rem;
+  margin-bottom: 0;
+  max-width: 760px;
+}
+
+.achievement-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.achievement-actions span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.achievement-stats {
+  display: grid;
+  gap: 12px;
+}
+
+.achievement-stats div {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.achievement-stats dt {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.achievement-stats dd {
+  color: rgba(255, 255, 255, 0.68);
+  margin: 6px 0 0;
+}
+
+.achievement-features {
+  display: grid;
+  gap: 10px;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.achievement-features li {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 14px;
+}
+
 .project-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -746,6 +855,20 @@ blockquote {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .achievement-card {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-card::after {
+    height: 34%;
+    inset: auto 0 0 0;
+    width: auto;
+  }
+
+  .achievement-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .life-slides,
   .life-image {
     min-height: 0;
@@ -791,6 +914,14 @@ blockquote {
   .hero-metrics,
   .project-grid,
   .education-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-card {
+    padding: 24px;
+  }
+
+  .achievement-features {
     grid-template-columns: 1fr;
   }
 
