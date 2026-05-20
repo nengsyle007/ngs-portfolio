@@ -133,11 +133,13 @@ const soundToggle = document.querySelector("[data-sound-toggle]");
 
 if (soundToggle) {
   const soundLabel = soundToggle.querySelector("[data-sound-label]");
+  const audioElement = document.querySelector("[data-portfolio-audio]");
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   let audioContext;
   let masterGain;
   let waterNodes = [];
   let soundEnabled = false;
+  let useGeneratedFallback = !audioElement;
 
   const updateSoundButton = () => {
     soundToggle.classList.toggle("is-on", soundEnabled);
@@ -147,6 +149,13 @@ if (soundToggle) {
       soundLabel.textContent = soundEnabled ? "Sound On" : "Sound Off";
     }
   };
+
+  if (audioElement) {
+    audioElement.volume = 0.32;
+    audioElement.addEventListener("error", () => {
+      useGeneratedFallback = true;
+    });
+  }
 
   const ensureAudio = () => {
     if (!AudioContextClass) {
@@ -178,6 +187,22 @@ if (soundToggle) {
     }
 
     return buffer;
+  };
+
+  const startAudioFile = async () => {
+    if (!audioElement || useGeneratedFallback || document.hidden) {
+      return false;
+    }
+
+    try {
+      audioElement.loop = true;
+      audioElement.volume = 0.32;
+      await audioElement.play();
+      return true;
+    } catch {
+      useGeneratedFallback = true;
+      return false;
+    }
   };
 
   const startWaterSound = () => {
@@ -224,6 +249,10 @@ if (soundToggle) {
   };
 
   const stopSound = () => {
+    if (audioElement) {
+      audioElement.pause();
+    }
+
     if (!audioContext) {
       return;
     }
@@ -238,14 +267,20 @@ if (soundToggle) {
     waterNodes = [];
   };
 
-  const startSound = () => {
+  const startSound = async () => {
+    stopSound();
+
+    const startedAudioFile = await startAudioFile();
+    if (startedAudioFile) {
+      return;
+    }
+
     if (!ensureAudio()) {
       soundEnabled = false;
       updateSoundButton();
       return;
     }
 
-    stopSound();
     startWaterSound();
   };
 
