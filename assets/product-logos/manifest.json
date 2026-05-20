@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "kstore",
+    "appId": "com.bizadvisor.kstore",
+    "icon": "assets/product-logos/kstore.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/jaUh0_zUJrLhRaNmyRrQkb4KR8ewiZYchCMertq0vvSuUyNbeV1yF_Axu-wV0V57aYY"
+  },
+  {
+    "slug": "tech-zone",
+    "appId": "com.bizadvisor.techzone.droid",
+    "icon": "assets/product-logos/tech-zone.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/gFUUyMwR2VQSgb2ZXLPiVUzoPD8mg9yvEG0fqqd-6CFqlvfyU1Yv-3E5fCuCsuFWlAQ"
+  },
+  {
+    "slug": "mycam-electronic",
+    "appId": "com.bizadvisor.mycam.droid",
+    "icon": "assets/product-logos/mycam-electronic.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/BZmH17El1Iz6JtNIQ6MEdvvIZvofkOEl2e_4WY_BiULg3fN-1ianLz0d2euNiBd7xn8"
+  },
+  {
+    "slug": "olympic-super-mart",
+    "appId": "com.bizadvisor.olympicsupermart",
+    "icon": "assets/product-logos/olympic-super-mart.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/GjQEj33sNZsVUz1wEvIIDhdL9hMgIXGWg1kMCFwPGATtXeI1KAp6tpyYb_6aCzjStR-0t5pQ4oUAXFW5GUTH"
+  },
+  {
+    "slug": "athena-jewelry",
+    "appId": "com.bizadvisor.sabrina",
+    "icon": "assets/product-logos/athena-jewelry.jpg",
+    "contentType": "image/jpeg",
+    "source": "https://play-lh.googleusercontent.com/GlyutngkRoPyaKs7iPHu5jjqXqL2JJl_ldP_FQTnIVn6_2cmzRxwkpZoOYyYvWR0w-gJCn_0AdHDHODCRGoFRZE"
+  },
+  {
+    "slug": "easy-kds",
+    "appId": "com.bizadvisor.kdskitchen",
+    "icon": "assets/product-logos/easy-kds.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/bg8N82K8ZfVbUs5hWMQO2ULpYCoGrKJzRYfUDaC0OssyB2mHhsbKnVcxjVq09nVR_0U"
+  },
+  {
+    "slug": "easy-ordering",
+    "appId": "com.bizadvisor.easyorderapp",
+    "icon": "assets/product-logos/easy-ordering.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/TpB_mf1-lGQgA42r2Evica2fKnc9LRtcnL_OOniM3bQ_5VW9vrPDKQ22WC4hZYIaj4ur"
+  },
+  {
+    "slug": "easy-merchant",
+    "appId": "com.bizadvisor.easymerchant",
+    "icon": "assets/product-logos/easy-merchant.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/vPqNy_YPGzJ0AHP7_tY-7hQ4Jntp80jzX06nk-zEt-00jJXU2rlWiSlegYc22wMu5PI"
+  },
+  {
+    "slug": "sombokit",
+    "appId": "com.bizadvisor.sombokit.droid",
+    "icon": "assets/product-logos/sombokit.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/EthahJ7Pu9nEpRKWxTneqdUFSOEBex25WoLSvZRUF_PsTx2aLREd8dU8jcsGpYxm0vX-"
+  },
+  {
+    "slug": "baby-shop",
+    "appId": "com.bizadvisor.ecommercedev.droid",
+    "icon": "assets/product-logos/baby-shop.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/RbJmhUeQscYu61sro9V6sYmbco6NMnedZ7FVui37v1hLRMD-AKWB77hQ3nG657w-6jNT"
+  },
+  {
+    "slug": "fashion-uat",
+    "appId": "com.bizadvisor.fashionuat.droid",
+    "icon": "assets/product-logos/fashion-uat.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/Ttqht0V-Bdmc2WCtAEI84OsfdCKCDsedsVdVTLJ4POoQTKDQ9Hki1NrxMJ2zpk_2VP4-"
+  },
+  {
+    "slug": "watch-uat",
+    "appId": "com.bizadvisor.watchuat.droid",
+    "icon": "assets/product-logos/watch-uat.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/W8xkfQ_OoIsYV0HdVPY-uP3gcOcaEKLHpHDRP23x3vjVgPZ2okou86t33S7t1VOQ8Fw"
+  },
+  {
+    "slug": "electronic-uat",
+    "appId": "com.bizadvisor.electronic.droid",
+    "icon": "assets/product-logos/electronic-uat.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/BBjFs0c13v67Pr4_zR3uGcxQdwp9oGEF9IOH9aGE9MbKvWe786euykeJ1pL5NJMYCw"
+  },
+  {
+    "slug": "cusmetic-shop",
+    "appId": "com.bizadvisor.goody.droid",
+    "icon": "assets/product-logos/cusmetic-shop.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/RSkf8Di5hdj_ZyVd-9P-bImSFBcSJtG276__CK4i08WbWocv_PgTpTPNzDZl49cxSqC0"
+  },
+  {
+    "slug": "my-baby-stores",
+    "appId": "com.bizadvisor.mybabystore.droid",
+    "icon": "assets/product-logos/my-baby-stores.png",
+    "contentType": "image/png",
+    "source": "https://play-lh.googleusercontent.com/mm20-I807RgBwa7l2KXBFJws--fbsxsWi6s6-u8X7NPZuIfr_xOfV-pSYwhVk38cc2UI"
+  }
+]
