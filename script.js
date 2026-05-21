@@ -40,6 +40,7 @@ if (lifeSlider) {
   let slideStartedAt = Date.now();
   let secondsLeft = intervalSeconds;
   let trackIndex = 0;
+  let trackSlides = slides;
 
   if (track && slides.length > 1) {
     const firstClone = slides[0].cloneNode(true);
@@ -53,6 +54,7 @@ if (lifeSlider) {
 
     track.append(firstClone);
     track.insertBefore(lastClone, track.firstElementChild);
+    trackSlides = Array.from(track.children);
     trackIndex = 1;
     track.style.transition = "none";
     track.style.transform = "translate3d(-100%, 0, 0)";
@@ -75,6 +77,12 @@ if (lifeSlider) {
     });
   };
 
+  const updateTrackSlideState = () => {
+    trackSlides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === trackIndex);
+    });
+  };
+
   const setTrackPosition = (index, shouldAnimate = true) => {
     if (!track) {
       return;
@@ -85,7 +93,9 @@ if (lifeSlider) {
 
     if (!shouldAnimate) {
       track.offsetHeight;
-      track.style.transition = "";
+      window.requestAnimationFrame(() => {
+        track.style.transition = "";
+      });
     }
   };
 
@@ -109,9 +119,7 @@ if (lifeSlider) {
       setTrackPosition(trackIndex);
     }
 
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === activeIndex);
-    });
+    updateTrackSlideState();
 
     dots.forEach((dot, dotIndex) => {
       const isActive = dotIndex === activeIndex;
@@ -128,9 +136,11 @@ if (lifeSlider) {
     if (trackIndex === slides.length + 1) {
       trackIndex = 1;
       setTrackPosition(trackIndex, false);
+      updateTrackSlideState();
     } else if (trackIndex === 0) {
       trackIndex = slides.length;
       setTrackPosition(trackIndex, false);
+      updateTrackSlideState();
     }
   });
 
