@@ -39,6 +39,26 @@ if (lifeSlider) {
   let progressTimer;
   let slideStartedAt = Date.now();
   let secondsLeft = intervalSeconds;
+  let trackIndex = 0;
+
+  if (track && slides.length > 1) {
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+
+    [firstClone, lastClone].forEach((clone) => {
+      clone.classList.remove("is-active");
+      clone.removeAttribute("data-life-slide");
+      clone.setAttribute("aria-hidden", "true");
+    });
+
+    track.append(firstClone);
+    track.insertBefore(lastClone, track.firstElementChild);
+    trackIndex = 1;
+    track.style.transition = "none";
+    track.style.transform = "translate3d(-100%, 0, 0)";
+    track.offsetHeight;
+    track.style.transition = "";
+  }
 
   const updateSeconds = () => {
     if (seconds) {
@@ -55,15 +75,38 @@ if (lifeSlider) {
     });
   };
 
+  const setTrackPosition = (index, shouldAnimate = true) => {
+    if (!track) {
+      return;
+    }
+
+    track.style.transition = shouldAnimate ? "" : "none";
+    track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
+
+    if (!shouldAnimate) {
+      track.offsetHeight;
+      track.style.transition = "";
+    }
+  };
+
   const showSlide = (index) => {
-    activeIndex = (index + slides.length) % slides.length;
+    const normalizedIndex = (index + slides.length) % slides.length;
+    activeIndex = normalizedIndex;
     slideStartedAt = Date.now();
     secondsLeft = intervalSeconds;
     updateSeconds();
     updateProgress();
 
     if (track) {
-      track.style.transform = `translate3d(-${activeIndex * 100}%, 0, 0)`;
+      if (index >= slides.length) {
+        trackIndex = slides.length + 1;
+      } else if (index < 0) {
+        trackIndex = 0;
+      } else {
+        trackIndex = normalizedIndex + (slides.length > 1 ? 1 : 0);
+      }
+
+      setTrackPosition(trackIndex);
     }
 
     slides.forEach((slide, slideIndex) => {
@@ -76,6 +119,20 @@ if (lifeSlider) {
       dot.setAttribute("aria-selected", String(isActive));
     });
   };
+
+  track?.addEventListener("transitionend", (event) => {
+    if (event.propertyName !== "transform" || slides.length <= 1) {
+      return;
+    }
+
+    if (trackIndex === slides.length + 1) {
+      trackIndex = 1;
+      setTrackPosition(trackIndex, false);
+    } else if (trackIndex === 0) {
+      trackIndex = slides.length;
+      setTrackPosition(trackIndex, false);
+    }
+  });
 
   const stopAutoPlay = () => {
     if (timer) {
