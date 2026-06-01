@@ -473,12 +473,33 @@ h3 {
   max-width: var(--max);
 }
 
-.style-system .section-heading h2 span {
+.bilingual-heading {
+  max-width: 1040px;
+}
+
+.bilingual-heading h2 {
+  color: #1c1c1c;
+  font-size: clamp(2.35rem, 5.2vw, 4.8rem);
+  font-weight: 700;
+  max-width: 1040px;
+}
+
+.bilingual-heading h2 span {
   background: var(--gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+}
+
+.khmer-line {
+  color: #24304a !important;
+  font-family: "Poppins", "Khmer MN", "Noto Sans Khmer", "Battambang", system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.7rem) !important;
+  font-weight: 600;
+  line-height: 1.75;
+  margin: 8px 0 18px;
+  max-width: 940px !important;
 }
 
 .style-grid {
@@ -1253,6 +1274,15 @@ h3 {
 
   h1 {
     font-size: 2.35rem;
+  }
+
+  .bilingual-heading h2 {
+    font-size: 2.25rem;
+  }
+
+  .khmer-line {
+    font-size: 1rem !important;
+    line-height: 1.7;
   }
 
   .hero-metrics,
