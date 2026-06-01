@@ -1,20 +1,42 @@
 :root {
   color-scheme: light;
-  --bg: #f4f7fb;
-  --ink: #071427;
-  --muted: #667085;
+  --bg: #f2f7f8;
+  --ink: #1c1c1c;
+  --muted: #858585;
   --surface: #ffffff;
-  --surface-soft: #eef3f8;
-  --line: #dce5ee;
-  --navy: #071427;
-  --navy-2: #0b1d35;
-  --gold: #c99a2e;
-  --gold-2: #f0c45c;
-  --cyan: #24c6dc;
-  --green: #16a57a;
-  --shadow: 0 24px 70px rgba(7, 20, 39, 0.16);
+  --surface-soft: #f9f9f9;
+  --line: #eeeeee;
+  --primary: #2860d7;
+  --blue: #5077ff;
+  --purple: #7761ff;
+  --purple-soft: rgba(119, 97, 255, 0.1);
+  --cyan: #46deff;
+  --error: #eb4d3d;
+  --gradient: linear-gradient(93.46deg, #6e57ff 15.41%, #3fcfef 115.64%);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   --radius: 8px;
+  --card-radius: 20px;
   --max: 1180px;
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-display: swap;
+  src: url("https://sandbox-pay.vattanacbank.com/fonts/poppins/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-display: swap;
+  font-weight: 500;
+  src: url("https://sandbox-pay.vattanacbank.com/fonts/poppins/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-display: swap;
+  font-weight: 700;
+  src: url("https://sandbox-pay.vattanacbank.com/fonts/poppins/Poppins-Bold.ttf") format("truetype");
 }
 
 * {
@@ -28,7 +50,7 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   margin: 0;
 }
@@ -52,9 +74,9 @@ p {
 }
 
 .site-header {
-  background: rgba(7, 20, 39, 0.92);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
+  background: rgb(255 255 255 / 70%);
+  backdrop-filter: blur(60px);
+  border-bottom: 1px solid rgba(238, 238, 238, 0.72);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -72,7 +94,7 @@ p {
 
 .brand {
   align-items: center;
-  color: #fff;
+  color: var(--ink);
   display: inline-grid;
   font-weight: 900;
   gap: 0 12px;
@@ -81,8 +103,9 @@ p {
 }
 
 .brand img {
-  border: 2px solid rgba(240, 196, 92, 0.9);
-  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   grid-row: span 2;
   height: 44px;
   object-fit: cover;
@@ -90,14 +113,14 @@ p {
 }
 
 .brand small {
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--muted);
   font-size: 0.72rem;
   font-weight: 800;
 }
 
 .nav-links {
   align-items: center;
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--ink);
   display: flex;
   font-size: 0.93rem;
   font-weight: 800;
@@ -105,13 +128,13 @@ p {
 }
 
 .nav-links a:hover {
-  color: #fff;
+  color: var(--primary);
 }
 
 .nav-cta {
-  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  background: var(--primary);
   border-radius: var(--radius);
-  color: #161105 !important;
+  color: #fff !important;
   padding: 11px 16px;
 }
 
@@ -125,7 +148,7 @@ p {
 }
 
 .nav-toggle span {
-  background: #fff;
+  background: var(--ink);
   display: block;
   height: 2px;
   margin: 5px 0;
@@ -141,10 +164,10 @@ p {
 .hero {
   align-items: center;
   background:
-    radial-gradient(circle at 75% 18%, rgba(36, 198, 220, 0.22), transparent 28%),
-    radial-gradient(circle at 28% 70%, rgba(201, 154, 46, 0.22), transparent 34%),
-    linear-gradient(135deg, #071427 0%, #0b1d35 56%, #12385a 100%);
-  color: #fff;
+    radial-gradient(circle at 85% 16%, rgba(70, 222, 255, 0.34), transparent 27%),
+    radial-gradient(circle at 18% 78%, rgba(119, 97, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f2f7f8 100%);
+  color: var(--ink);
   display: grid;
   gap: 56px;
   grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
@@ -158,8 +181,8 @@ p {
 
 .hero::after {
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(40, 96, 215, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(40, 96, 215, 0.05) 1px, transparent 1px);
   background-size: 64px 64px;
   content: "";
   inset: 0;
@@ -174,7 +197,7 @@ p {
 }
 
 .eyebrow {
-  color: var(--gold-2);
+  color: var(--purple);
   font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -212,7 +235,7 @@ h3 {
 }
 
 .hero .hero-lead {
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--muted);
   font-size: 1.14rem;
 }
 
@@ -239,15 +262,15 @@ h3 {
 }
 
 .button.primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold-2));
-  box-shadow: 0 16px 34px rgba(201, 154, 46, 0.24);
-  color: #151005;
+  background: var(--primary);
+  box-shadow: 0 14px 30px rgba(40, 96, 215, 0.2);
+  color: #fff;
 }
 
 .button.secondary {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: var(--purple-soft);
+  border: 0;
+  color: var(--purple);
 }
 
 .contact-section .button.secondary,
@@ -266,34 +289,34 @@ h3 {
 }
 
 .hero-metrics div {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
   padding: 18px;
 }
 
 .hero-metrics dt {
-  color: #fff;
+  color: var(--primary);
   font-size: 2rem;
   font-weight: 950;
   line-height: 1;
 }
 
 .hero-metrics dd {
-  color: rgba(255, 255, 255, 0.66);
+  color: var(--muted);
   margin: 6px 0 0;
 }
 
 .profile-panel {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
   padding: 28px;
 }
 
 .panel-kicker {
-  color: var(--gold-2);
+  color: var(--purple);
   font-size: 0.76rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -308,7 +331,7 @@ h3 {
 }
 
 .profile-photo {
-  border: 2px solid rgba(240, 196, 92, 0.92);
+  border: 2px solid var(--purple);
   border-radius: 999px;
   height: 82px;
   object-fit: cover;
@@ -316,21 +339,21 @@ h3 {
 }
 
 .profile-name {
-  color: #fff;
+  color: var(--ink);
   font-size: 1.35rem;
   font-weight: 950;
   margin-bottom: 2px;
 }
 
 .profile-role {
-  color: var(--gold-2);
+  color: var(--blue);
   font-weight: 850;
   margin-bottom: 0;
 }
 
 blockquote {
-  border-left: 4px solid var(--gold-2);
-  color: rgba(255, 255, 255, 0.82);
+  border-left: 4px solid var(--purple);
+  color: var(--ink);
   font-size: 1.12rem;
   font-weight: 850;
   margin: 30px 0;
@@ -343,10 +366,10 @@ blockquote {
 }
 
 .contact-list a {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface-soft);
+  border: 1px solid transparent;
   border-radius: var(--radius);
-  color: #fff;
+  color: var(--ink);
   display: block;
   font-weight: 850;
   overflow-wrap: anywhere;
@@ -354,7 +377,7 @@ blockquote {
 }
 
 .contact-list span {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--muted);
   display: block;
   font-size: 0.78rem;
   font-weight: 850;
@@ -436,7 +459,7 @@ blockquote {
 .store-portfolio {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--card-radius);
   box-shadow: 0 14px 38px rgba(7, 20, 39, 0.06);
 }
 
@@ -447,9 +470,9 @@ blockquote {
 
 .process-grid span {
   align-items: center;
-  background: var(--navy);
+  background: var(--purple-soft);
   border-radius: 999px;
-  color: var(--gold-2);
+  color: var(--purple);
   display: inline-flex;
   font-size: 0.82rem;
   font-weight: 950;
@@ -479,8 +502,8 @@ blockquote {
 }
 
 .timeline-dot {
-  background: var(--gold-2);
-  border: 5px solid #fff3d0;
+  background: var(--purple);
+  border: 5px solid rgba(119, 97, 255, 0.16);
   border-radius: 999px;
   height: 22px;
   margin-top: 24px;
@@ -496,8 +519,8 @@ blockquote {
 }
 
 .timeline-item.featured .timeline-content {
-  background: linear-gradient(135deg, #071427, #113250);
-  border-color: rgba(201, 154, 46, 0.32);
+  background: var(--gradient);
+  border-color: transparent;
   color: #fff;
 }
 
@@ -512,7 +535,7 @@ blockquote {
 
 .timeline-item.featured .role,
 .timeline-item.featured time {
-  color: var(--gold-2);
+  color: #fff;
 }
 
 .timeline-content h3 {
@@ -520,7 +543,7 @@ blockquote {
 }
 
 .timeline-content time {
-  color: var(--green);
+  color: var(--blue);
   flex: 0 0 auto;
 }
 
@@ -577,7 +600,7 @@ blockquote {
 .life-slider {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--card-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -642,7 +665,7 @@ blockquote {
 
 .life-copy {
   align-content: center;
-  background: linear-gradient(135deg, #071427, #113250);
+  background: var(--gradient);
   color: #fff;
   display: grid;
   gap: 16px;
@@ -650,7 +673,7 @@ blockquote {
 }
 
 .life-copy span {
-  color: var(--gold-2);
+  color: #fff;
   font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -664,7 +687,7 @@ blockquote {
 }
 
 .life-copy p {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.84);
   font-size: 1.08rem;
   margin-bottom: 0;
   max-width: 560px;
@@ -698,7 +721,7 @@ blockquote {
 }
 
 .life-arrow:hover {
-  color: var(--gold);
+  color: var(--purple);
   transform: translateY(-1px);
 }
 
@@ -724,7 +747,7 @@ blockquote {
 }
 
 .life-dots button span {
-  background: var(--gold);
+  background: var(--gradient);
   border-radius: inherit;
   display: block;
   height: 100%;
@@ -748,9 +771,9 @@ blockquote {
 
 .achievement-card {
   background:
-    radial-gradient(circle at 85% 15%, rgba(36, 198, 220, 0.24), transparent 28%),
-    linear-gradient(135deg, #071427, #17395c);
-  border-radius: var(--radius);
+    radial-gradient(circle at 84% 12%, rgba(70, 222, 255, 0.34), transparent 30%),
+    var(--gradient);
+  border-radius: var(--card-radius);
   box-shadow: var(--shadow);
   color: #fff;
   display: grid;
@@ -790,7 +813,7 @@ blockquote {
 .achievement-label,
 .store-portfolio-heading span,
 .store-app-card span {
-  color: var(--gold-2);
+  color: var(--purple);
   display: block;
   font-size: 0.76rem;
   font-weight: 950;
@@ -809,7 +832,7 @@ blockquote {
 }
 
 .achievement-copy p {
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 1.04rem;
   margin-bottom: 0;
   max-width: 760px;
@@ -824,7 +847,7 @@ blockquote {
 }
 
 .achievement-actions span {
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 0.9rem;
   font-weight: 850;
 }
@@ -852,7 +875,7 @@ blockquote {
 }
 
 .achievement-stats dd {
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.82);
   margin: 6px 0 0;
 }
 
@@ -867,7 +890,7 @@ blockquote {
 }
 
 .achievement-features li {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.92rem;
   font-weight: 850;
   padding: 14px;
@@ -904,7 +927,7 @@ blockquote {
 .store-app-card {
   background: var(--surface-soft);
   border: 1px solid transparent;
-  border-radius: var(--radius);
+  border-radius: var(--card-radius);
   display: grid;
   gap: 8px;
   min-height: 218px;
@@ -913,12 +936,12 @@ blockquote {
 }
 
 .store-app-card span {
-  color: var(--green);
+  color: var(--blue);
 }
 
 .store-app-card:hover {
   background: #fff;
-  border-color: rgba(201, 154, 46, 0.34);
+  border-color: rgba(119, 97, 255, 0.34);
   transform: translateY(-3px);
 }
 
@@ -948,14 +971,14 @@ blockquote {
 }
 
 .project-card.major {
-  background: linear-gradient(135deg, var(--navy), #17395c);
+  background: var(--gradient);
   color: #fff;
   grid-column: span 2;
 }
 
 .project-card.major p,
 .project-card.major span {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .education-grid {
@@ -980,7 +1003,7 @@ blockquote {
 .resume-preview {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--card-radius);
   box-shadow: var(--shadow);
   max-height: 560px;
   overflow: hidden;
@@ -992,8 +1015,8 @@ blockquote {
 
 .footer {
   align-items: center;
-  background: var(--navy);
-  color: rgba(255, 255, 255, 0.68);
+  background: var(--primary);
+  color: rgba(255, 255, 255, 0.74);
   display: flex;
   gap: 20px;
   justify-content: space-between;
@@ -1007,13 +1030,13 @@ blockquote {
 }
 
 .footer a {
-  color: var(--gold-2);
+  color: #fff;
   font-weight: 950;
 }
 
 .sound-toggle {
-  background: rgba(7, 20, 39, 0.92);
-  border: 1px solid rgba(240, 196, 92, 0.32);
+  background: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 999px;
   bottom: 22px;
   box-shadow: 0 16px 38px rgba(7, 20, 39, 0.24);
@@ -1032,8 +1055,8 @@ blockquote {
 
 .sound-toggle:hover,
 .sound-toggle.is-on {
-  background: linear-gradient(135deg, var(--gold), var(--gold-2));
-  color: #151005;
+  background: var(--purple);
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -1053,8 +1076,8 @@ blockquote {
   }
 
   .nav-links {
-    background: rgba(7, 20, 39, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     display: none;
