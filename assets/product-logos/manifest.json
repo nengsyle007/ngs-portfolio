@@ -7,6 +7,13 @@
     "source": "https://play-lh.googleusercontent.com/jaUh0_zUJrLhRaNmyRrQkb4KR8ewiZYchCMertq0vvSuUyNbeV1yF_Axu-wV0V57aYY"
   },
   {
+    "slug": "alarm-coffee",
+    "appId": "com.bizadvisor.alarmclock",
+    "icon": "assets/product-logos/alarm-coffee.webp",
+    "contentType": "image/webp",
+    "source": "https://play-lh.googleusercontent.com/t5G-rdHDtinN0rWxLToOf3tMQGOg123qjJuuNxDFuRCHyW-qOvS1Nsrfg0qJh7w8tsT8a2hIMvw05qBJWcQ2CF4"
+  },
+  {
     "slug": "tech-zone",
     "appId": "com.bizadvisor.techzone.droid",
     "icon": "assets/product-logos/tech-zone.png",
