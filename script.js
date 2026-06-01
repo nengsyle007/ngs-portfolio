@@ -204,7 +204,7 @@ if (soundToggle) {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   let audioContext;
   let masterGain;
-  let waterNodes = [];
+  let welcomeNodes = [];
   let soundEnabled = false;
   let useGeneratedFallback = !audioElement;
 
@@ -232,7 +232,7 @@ if (soundToggle) {
     if (!audioContext) {
       audioContext = new AudioContextClass();
       masterGain = audioContext.createGain();
-      masterGain.gain.value = 0.11;
+      masterGain.gain.value = 0.18;
       masterGain.connect(audioContext.destination);
     }
 
@@ -243,27 +243,15 @@ if (soundToggle) {
     return true;
   };
 
-  const createNoiseBuffer = (durationSeconds) => {
-    const sampleRate = audioContext.sampleRate;
-    const frameCount = sampleRate * durationSeconds;
-    const buffer = audioContext.createBuffer(1, frameCount, sampleRate);
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < frameCount; i += 1) {
-      data[i] = Math.random() * 2 - 1;
-    }
-
-    return buffer;
-  };
-
   const startAudioFile = async () => {
     if (!audioElement || useGeneratedFallback || document.hidden) {
       return false;
     }
 
     try {
-      audioElement.loop = true;
+      audioElement.loop = false;
       audioElement.volume = 0.32;
+      audioElement.currentTime = 0;
       await audioElement.play();
       return true;
     } catch {
@@ -272,47 +260,41 @@ if (soundToggle) {
     }
   };
 
-  const startWaterSound = () => {
+  const startWelcomeSound = () => {
     if (!audioContext || !masterGain || document.hidden) {
       return;
     }
 
     const now = audioContext.currentTime;
-    const source = audioContext.createBufferSource();
-    const highpass = audioContext.createBiquadFilter();
-    const lowpass = audioContext.createBiquadFilter();
-    const gain = audioContext.createGain();
-    const lfo = audioContext.createOscillator();
-    const lfoGain = audioContext.createGain();
+    const notes = [
+      { delay: 0, duration: 0.52, frequency: 523.25, peak: 0.38 },
+      { delay: 0.14, duration: 0.56, frequency: 659.25, peak: 0.32 },
+      { delay: 0.3, duration: 0.68, frequency: 783.99, peak: 0.28 },
+      { delay: 0.52, duration: 0.78, frequency: 1046.5, peak: 0.16 },
+    ];
 
-    source.buffer = createNoiseBuffer(3);
-    source.loop = true;
+    welcomeNodes = notes.map(({ delay, duration, frequency, peak }) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      const startAt = now + delay;
+      const endAt = startAt + duration;
 
-    highpass.type = "highpass";
-    highpass.frequency.setValueAtTime(180, now);
-    highpass.Q.setValueAtTime(0.7, now);
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(frequency, startAt);
+      gain.gain.setValueAtTime(0, startAt);
+      gain.gain.linearRampToValueAtTime(peak, startAt + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, endAt);
 
-    lowpass.type = "lowpass";
-    lowpass.frequency.setValueAtTime(1150, now);
-    lowpass.Q.setValueAtTime(0.45, now);
+      oscillator.connect(gain);
+      gain.connect(masterGain);
+      oscillator.start(startAt);
+      oscillator.stop(endAt + 0.04);
+      oscillator.addEventListener("ended", () => {
+        welcomeNodes = welcomeNodes.filter((node) => node.oscillator !== oscillator);
+      });
 
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.32, now + 0.8);
-
-    lfo.type = "sine";
-    lfo.frequency.setValueAtTime(0.18, now);
-    lfoGain.gain.setValueAtTime(0.08, now);
-
-    source.connect(highpass);
-    highpass.connect(lowpass);
-    lowpass.connect(gain);
-    gain.connect(masterGain);
-    lfo.connect(lfoGain);
-    lfoGain.connect(gain.gain);
-
-    source.start(now);
-    lfo.start(now);
-    waterNodes = [{ source, gain, lfo }];
+      return { oscillator, gain };
+    });
   };
 
   const stopSound = () => {
@@ -325,13 +307,16 @@ if (soundToggle) {
     }
 
     const now = audioContext.currentTime;
-    waterNodes.forEach(({ source, gain, lfo }) => {
+    welcomeNodes.forEach(({ oscillator, gain }) => {
       gain.gain.cancelScheduledValues(now);
       gain.gain.setTargetAtTime(0, now, 0.25);
-      source.stop(now + 0.9);
-      lfo.stop(now + 0.9);
+      try {
+        oscillator.stop(now + 0.32);
+      } catch {
+        // The welcome chime may already have finished naturally.
+      }
     });
-    waterNodes = [];
+    welcomeNodes = [];
   };
 
   const startSound = async () => {
@@ -348,7 +333,7 @@ if (soundToggle) {
       return;
     }
 
-    startWaterSound();
+    startWelcomeSound();
   };
 
   soundToggle.addEventListener("click", () => {
