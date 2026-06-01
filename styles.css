@@ -99,8 +99,9 @@ p {
   display: inline-grid;
   font-weight: 900;
   gap: 0 12px;
-  grid-template-columns: 56px minmax(0, 280px);
+  grid-template-columns: 56px minmax(0, 330px);
   line-height: 1.1;
+  max-width: min(42vw, 420px);
 }
 
 .brand img {
@@ -122,7 +123,7 @@ p {
 
 .brand small {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -1243,7 +1244,8 @@ h3 {
   }
 
   .brand {
-    grid-template-columns: 46px minmax(0, 210px);
+    grid-template-columns: 46px minmax(0, 1fr);
+    max-width: calc(100vw - 104px);
   }
 
   .brand img {
@@ -1257,7 +1259,8 @@ h3 {
   }
 
   .brand small {
-    font-size: 0.7rem;
+    font-size: 0.66rem;
+    line-height: 1.25;
   }
 
   .logo-strip {
