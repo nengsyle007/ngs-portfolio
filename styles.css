@@ -672,7 +672,7 @@ h3 {
 .timeline {
   display: grid;
   gap: 16px;
-  padding-left: 42px;
+  padding-left: 54px;
   position: relative;
 }
 
@@ -681,7 +681,7 @@ h3 {
   border-radius: 999px;
   content: "";
   height: calc(100% - 30px);
-  left: 10px;
+  left: 15px;
   position: absolute;
   top: 15px;
   width: 2px;
@@ -693,20 +693,20 @@ h3 {
 
 .timeline-dot {
   align-items: center;
-  background: var(--purple);
-  border: 6px solid #f0ecff;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  border: 7px solid #f0ecff;
   border-radius: 999px;
-  box-shadow: 0 14px 30px rgba(119, 97, 255, 0.24);
+  box-shadow: 0 16px 36px rgba(119, 97, 255, 0.28);
   color: #fff;
   display: flex;
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  height: 28px;
+  height: 42px;
   justify-content: center;
-  left: -45px;
+  left: -59px;
   position: absolute;
-  top: 34px;
-  width: 28px;
+  top: 31px;
+  width: 42px;
 }
 
 .timeline-item:nth-child(1) .timeline-dot::before {
@@ -756,10 +756,22 @@ h3 {
 }
 
 .timeline-item.featured .timeline-content {
+  background:
+    radial-gradient(circle at 96% 18%, rgba(63, 207, 239, 0.18), transparent 28%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.96));
+  border-color: rgba(119, 97, 255, 0.26);
+  box-shadow: 0 24px 58px rgba(80, 119, 255, 0.14);
+  color: var(--ink);
+  position: relative;
+}
+
+.timeline-item.featured .timeline-content::before {
   background: var(--gradient);
-  border-color: transparent;
-  box-shadow: 0 24px 58px rgba(80, 119, 255, 0.22);
-  color: #fff;
+  border-radius: 18px 0 0 18px;
+  content: "";
+  inset: 0 auto 0 0;
+  position: absolute;
+  width: 7px;
 }
 
 .role,
@@ -795,11 +807,12 @@ h3 {
 .timeline-item.featured .role,
 .timeline-item.featured h3,
 .timeline-item.featured time {
-  color: #fff;
+  color: var(--ink);
 }
 
 .timeline-item.featured time {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(80, 119, 255, 0.12);
+  color: var(--blue);
 }
 
 .split {
@@ -1471,7 +1484,7 @@ h3 {
   }
 
   .timeline {
-    padding-left: 30px;
+    padding-left: 42px;
   }
 
   .timeline-frame {
@@ -1484,8 +1497,12 @@ h3 {
   }
 
   .timeline-dot {
-    left: -34px;
-    top: 30px;
+    border-width: 6px;
+    font-size: 0.78rem;
+    height: 34px;
+    left: -45px;
+    top: 32px;
+    width: 34px;
   }
 
   .timeline-content time {
