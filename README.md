@@ -8,7 +8,7 @@ Static portfolio website for Puth Neng, designed for simple hosting on GitHub Pa
 - `styles.css` - responsive visual design
 - `script.js` - mobile navigation behavior and footer year
 - `assets/puth-neng-cv.pdf` - downloadable CV
-- `assets/profile.png` - profile image
+- `assets/profile.jpg` - profile image
 - `assets/cv-preview.png` - CV preview image
 - `assets/life-reading.jpg` - professional life image
 - `assets/life-sunset-close.jpg` - professional life image
