@@ -1039,11 +1039,13 @@ h3 {
 
 .achievement-card {
   background:
-    radial-gradient(circle at 84% 12%, rgba(70, 222, 255, 0.34), transparent 30%),
-    var(--gradient);
+    radial-gradient(circle at 8% 10%, rgba(119, 97, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 92% 18%, rgba(63, 207, 239, 0.22), transparent 28%),
+    linear-gradient(135deg, #ffffff 0%, #f6f3ff 45%, #eefaff 100%);
+  border: 1px solid rgba(119, 97, 255, 0.16);
   border-radius: var(--card-radius);
-  box-shadow: var(--shadow);
-  color: #fff;
+  box-shadow: 0 28px 70px rgba(31, 49, 95, 0.13);
+  color: var(--ink);
   display: grid;
   gap: 28px;
   grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.55fr);
@@ -1051,6 +1053,17 @@ h3 {
   overflow: hidden;
   padding: 32px;
   position: relative;
+}
+
+.achievement-card::before {
+  background: linear-gradient(180deg, rgba(119, 97, 255, 0.95), rgba(63, 207, 239, 0.82));
+  border-radius: 999px;
+  content: "";
+  height: calc(100% - 64px);
+  left: 0;
+  position: absolute;
+  top: 32px;
+  width: 6px;
 }
 
 .achievement-copy,
@@ -1100,7 +1113,7 @@ h3 {
 }
 
 .achievement-copy p {
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--muted);
   font-size: 1.04rem;
   margin-bottom: 0;
   max-width: 760px;
@@ -1115,7 +1128,7 @@ h3 {
 }
 
 .achievement-actions span {
-  color: rgba(255, 255, 255, 0.82);
+  color: #4d5d82;
   font-size: 0.9rem;
   font-weight: 850;
 }
@@ -1127,9 +1140,10 @@ h3 {
 
 .achievement-stats div,
 .achievement-features li {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(119, 97, 255, 0.13);
   border-radius: var(--radius);
+  box-shadow: 0 16px 36px rgba(31, 49, 95, 0.08);
 }
 
 .achievement-stats div {
@@ -1137,13 +1151,14 @@ h3 {
 }
 
 .achievement-stats dt {
+  color: var(--blue);
   font-size: 2rem;
   font-weight: 950;
   line-height: 1;
 }
 
 .achievement-stats dd {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--muted);
   margin: 6px 0 0;
 }
 
@@ -1158,7 +1173,7 @@ h3 {
 }
 
 .achievement-features li {
-  color: rgba(255, 255, 255, 0.9);
+  color: #263653;
   font-size: 0.92rem;
   font-weight: 850;
   padding: 14px;
