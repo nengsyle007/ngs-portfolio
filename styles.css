@@ -862,14 +862,17 @@ h3 {
 }
 
 .life-section {
-  max-width: var(--max);
+  background: #fff;
+  max-width: none;
+  padding-left: max(24px, calc((100vw - var(--max)) / 2 + 24px));
+  padding-right: max(24px, calc((100vw - var(--max)) / 2 + 24px));
 }
 
 .life-slider {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(31, 49, 95, 0.08);
   border-radius: var(--card-radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 26px 70px rgba(31, 49, 95, 0.1);
   overflow: hidden;
 }
 
@@ -912,7 +915,9 @@ h3 {
 }
 
 .life-image::after {
-  background: linear-gradient(90deg, transparent 0%, rgba(7, 20, 39, 0.12) 72%, rgba(7, 20, 39, 0.4) 100%);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 58%, rgba(255, 250, 243, 0.5) 100%),
+    linear-gradient(180deg, rgba(7, 20, 39, 0.02), rgba(7, 20, 39, 0.1));
   content: "";
   inset: 0;
   position: absolute;
@@ -933,15 +938,30 @@ h3 {
 
 .life-copy {
   align-content: center;
-  background: var(--gradient);
-  color: #fff;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 178, 96, 0.2), transparent 32%),
+    radial-gradient(circle at 88% 8%, rgba(63, 207, 239, 0.22), transparent 35%),
+    linear-gradient(135deg, #fffaf5 0%, #f7fbff 52%, #eef8ff 100%);
+  color: var(--ink);
   display: grid;
   gap: 16px;
   padding: 48px;
+  position: relative;
+}
+
+.life-copy::before {
+  background: linear-gradient(180deg, #ffb260, var(--purple), var(--cyan));
+  border-radius: 999px;
+  content: "";
+  height: calc(100% - 96px);
+  left: 0;
+  position: absolute;
+  top: 48px;
+  width: 5px;
 }
 
 .life-copy span {
-  color: #fff;
+  color: var(--purple);
   font-size: 0.78rem;
   font-weight: 950;
   letter-spacing: 0.12em;
@@ -955,7 +975,7 @@ h3 {
 }
 
 .life-copy p {
-  color: rgba(255, 255, 255, 0.84);
+  color: #596271;
   font-size: 1.08rem;
   margin-bottom: 0;
   max-width: 560px;
@@ -1407,6 +1427,11 @@ h3 {
   .life-copy {
     padding: 34px;
   }
+
+  .life-copy::before {
+    height: calc(100% - 68px);
+    top: 34px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1486,6 +1511,11 @@ h3 {
 
   .life-copy {
     padding: 24px;
+  }
+
+  .life-copy::before {
+    height: calc(100% - 48px);
+    top: 24px;
   }
 
   .life-controls {
