@@ -436,7 +436,10 @@ h3 {
 }
 
 .style-system {
-  background: #fff;
+  background:
+    radial-gradient(circle at 8% 20%, rgba(119, 97, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 94% 12%, rgba(70, 222, 255, 0.12), transparent 26%),
+    #fff;
   max-width: none;
 }
 
@@ -444,6 +447,14 @@ h3 {
   margin-left: auto;
   margin-right: auto;
   max-width: var(--max);
+}
+
+.style-system .section-heading h2 span {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .style-grid {
