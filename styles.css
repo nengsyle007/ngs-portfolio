@@ -492,16 +492,6 @@ h3 {
   display: inline-block;
 }
 
-.khmer-line {
-  color: #24304a !important;
-  font-family: "Poppins", "Khmer MN", "Noto Sans Khmer", "Battambang", system-ui, sans-serif;
-  font-size: clamp(1.15rem, 2vw, 1.7rem) !important;
-  font-weight: 600;
-  line-height: 1.75;
-  margin: 8px 0 18px;
-  max-width: 940px !important;
-}
-
 .style-grid {
   display: grid;
   gap: 16px;
@@ -1449,11 +1439,6 @@ h3 {
 
   .bilingual-heading h2 {
     font-size: 2.25rem;
-  }
-
-  .khmer-line {
-    font-size: 1rem !important;
-    line-height: 1.7;
   }
 
   .hero-metrics,
