@@ -48,6 +48,10 @@ html {
   scroll-behavior: smooth;
 }
 
+[id] {
+  scroll-margin-top: 110px;
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -615,6 +619,101 @@ h3 {
 .education-grid p {
   color: var(--muted);
   margin-bottom: 0;
+}
+
+.systems-section {
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  max-width: none;
+}
+
+.systems-section > * {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max);
+}
+
+.systems-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.system-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+  box-shadow: 0 16px 42px rgba(7, 20, 39, 0.06);
+  display: grid;
+  gap: 14px;
+  min-height: 360px;
+  padding: 24px;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.system-card:hover {
+  border-color: rgba(119, 97, 255, 0.3);
+  box-shadow: 0 22px 54px rgba(40, 96, 215, 0.11);
+  transform: translateY(-3px);
+}
+
+.system-card.featured {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(63, 207, 239, 0.2), transparent 30%),
+    linear-gradient(135deg, #ffffff 0%, #f4f2ff 54%, #effaff 100%);
+  border-color: rgba(119, 97, 255, 0.18);
+}
+
+.system-icon {
+  align-items: center;
+  background: var(--gradient);
+  border-radius: 16px;
+  box-shadow: 0 16px 34px rgba(80, 119, 255, 0.2);
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 950;
+  height: 54px;
+  justify-content: center;
+  letter-spacing: 0;
+  width: 54px;
+}
+
+.system-card span {
+  color: var(--purple);
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.system-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+.system-card p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.system-card ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+}
+
+.system-card li {
+  background: var(--surface-soft);
+  border-radius: var(--radius);
+  color: #263850;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.45;
+  padding: 10px 12px;
 }
 
 .experience-section {
@@ -1380,6 +1479,7 @@ h3 {
   .project-grid,
   .education-grid,
   .style-grid,
+  .systems-grid,
   .store-app-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1446,9 +1546,14 @@ h3 {
   .project-grid,
   .education-grid,
   .style-grid,
+  .systems-grid,
   .store-app-grid,
   .achievement-features {
     grid-template-columns: 1fr;
+  }
+
+  .system-card {
+    min-height: auto;
   }
 
   .brand {
