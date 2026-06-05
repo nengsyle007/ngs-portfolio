@@ -1038,17 +1038,6 @@ h3 {
   position: relative;
 }
 
-.life-copy::before {
-  background: linear-gradient(180deg, #ffb260, var(--purple), var(--cyan));
-  border-radius: 999px;
-  content: "";
-  height: calc(100% - 96px);
-  left: 0;
-  position: absolute;
-  top: 48px;
-  width: 5px;
-}
-
 .life-copy span {
   color: var(--purple);
   font-size: 0.78rem;
@@ -1518,10 +1507,6 @@ h3 {
     padding: 34px;
   }
 
-  .life-copy::before {
-    height: calc(100% - 68px);
-    top: 34px;
-  }
 }
 
 @media (max-width: 640px) {
@@ -1601,11 +1586,6 @@ h3 {
 
   .life-copy {
     padding: 24px;
-  }
-
-  .life-copy::before {
-    height: calc(100% - 48px);
-    top: 24px;
   }
 
   .life-controls {
